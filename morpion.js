@@ -11,6 +11,7 @@ var affichageGrille = document.getElementById("grilleMorpion");
 var tour = 1;
 var victory = false; //flag de fin
 var btnReStart = document.getElementById('restart');
+btnReStart.addEventListener("click", nouvellePartie);
 
 //déterminer le nombre de joueurs humains
 modeDeJeu();
@@ -32,14 +33,7 @@ var affichageSymboleJoueur1 = document.getElementById("symboleJoueur1");
 var affichageOrdreJoueur2 = document.getElementById("ordreJoueur2");
 var affichageSymboleJoueur2 = document.getElementById("symboleJoueur2");
 
-affichageOrdreJoueur1.innerHTML = joueur1.getOrdreJoueur();
-affichageSymboleJoueur1.innerHTML = joueur1.getSymboleJoueur();
-
-affichageOrdreJoueur2.innerHTML = joueur2.getOrdreJoueur();
-affichageSymboleJoueur2.innerHTML = joueur2.getSymboleJoueur();
-
-console.log(joueur1.toString());
-console.log(joueur2.toString());
+affichageInfosJoueurs();
 
 //initialiser l'affichage du tour en cours
 var tourActif = document.getElementById("tour");
@@ -149,14 +143,16 @@ function ordreJoueurActif(){
 }
 
 function victoireJoueur(){
-    if (tGrille[0]==tGrille[1] && tGrille[1]==tGrille[2]
-        || tGrille[3]==tGrille[4] && tGrille[4]==tGrille[5]
-        || tGrille[6]==tGrille[7] && tGrille[7]==tGrille[8]
-        || tGrille[0]==tGrille[4] && tGrille[4]==tGrille[8]
-        || tGrille[6]==tGrille[4] && tGrille[4]==tGrille[2]
-        || tGrille[0]==tGrille[3] && tGrille[3]==tGrille[6]
-        || tGrille[1]==tGrille[4] && tGrille[4]==tGrille[7]
-        || tGrille[2]==tGrille[5] && tGrille[5]==tGrille[8]){
+    var condition = tGrille[0]==tGrille[1] && tGrille[1]==tGrille[2]
+    || tGrille[3]==tGrille[4] && tGrille[4]==tGrille[5]
+    || tGrille[6]==tGrille[7] && tGrille[7]==tGrille[8]
+    || tGrille[0]==tGrille[4] && tGrille[4]==tGrille[8]
+    || tGrille[6]==tGrille[4] && tGrille[4]==tGrille[2]
+    || tGrille[0]==tGrille[3] && tGrille[3]==tGrille[6]
+    || tGrille[1]==tGrille[4] && tGrille[4]==tGrille[7]
+    || tGrille[2]==tGrille[5] && tGrille[5]==tGrille[8];
+
+    if (condition){
             victory = true;
             btnReStart.style = "display : inline-block";
             document.getElementById("affichageJoueurs").innerHTML = joueurActif.getNomJoueur() + " a gagné !";
@@ -165,7 +161,17 @@ function victoireJoueur(){
 }
 
 function finPartieEgalite(){
-    if(tour == 9){
+    var condition = tGrille[0]==tGrille[1] && tGrille[1]==tGrille[2]
+    || tGrille[3]==tGrille[4] && tGrille[4]==tGrille[5]
+    || tGrille[6]==tGrille[7] && tGrille[7]==tGrille[8]
+    || tGrille[0]==tGrille[4] && tGrille[4]==tGrille[8]
+    || tGrille[6]==tGrille[4] && tGrille[4]==tGrille[2]
+    || tGrille[0]==tGrille[3] && tGrille[3]==tGrille[6]
+    || tGrille[1]==tGrille[4] && tGrille[4]==tGrille[7]
+    || tGrille[2]==tGrille[5] && tGrille[5]==tGrille[8];
+
+    if(tour == 9 && !condition){
+        btnReStart.style = "display : inline-block";
         alert("EGALITE");
     }
 }
@@ -194,5 +200,30 @@ function caseJouerOrdi(){ //nombre random entre 0 et 8 (les indices du tableai t
 }
 
 function ordiAuto(){ // pour avoir un délai avant apparition du choix de l'ordi
-    setTimeout(caseJouerOrdi, 1500);
+    setTimeout(caseJouerOrdi, 1000);
+}
+
+function nouvellePartie(){
+    tour = 1;
+    tGrille = [1,2,3,4,5,6,7,8,9];
+    victory = false;
+    modeDeJeu();
+    selectPion();
+    ordreAleatoire();
+    affichageGrilleMorpion();
+    affichageInfosJoueurs();
+    caseJouerOrdi();
+    btnReStart.style = "display : none";
+}
+
+function affichageInfosJoueurs(){
+    document.getElementById("affichageJoueurs").innerHTML = "<div class=\"joueur\"\><div>Joueur 1</div\><br\><div>joue en : <span id=\"ordreJoueur1\"></span></div\><br\><div>avec le symbole : <span id=\"symboleJoueur1\"></span></div\></div\><br\><div class=\"joueur\"\><div>Joueur 2</div\><br\><div>joue en : <span id=\"ordreJoueur2\"></span></div\><br\><div>avec le symbole : <span id=\"symboleJoueur2\"></span></div\></div>";
+    affichageOrdreJoueur1.innerHTML = joueur1.getOrdreJoueur();
+    affichageSymboleJoueur1.innerHTML = joueur1.getSymboleJoueur();
+
+    affichageOrdreJoueur2.innerHTML = joueur2.getOrdreJoueur();
+    affichageSymboleJoueur2.innerHTML = joueur2.getSymboleJoueur();
+
+    console.log(joueur1.toString());
+    console.log(joueur2.toString());
 }
