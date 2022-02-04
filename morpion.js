@@ -9,6 +9,7 @@ var joueurActif;
 var tGrille = [1,2,3,4,5,6,7,8,9];
 var affichageGrille = document.getElementById("grilleMorpion");
 var tour = 1;
+var victory = false;
 
 //déterminer le nombre de joueurs humains
 modeDeJeu();
@@ -130,7 +131,7 @@ function afficherSymbole(){ // afficher le symbole dans la grille et modifier va
         finPartieEgalite();
         tour++;
     }
-    if(joueur2.getNomJoueur()=='ordi'){
+    if(joueur2.getNomJoueur()=='ordi'){ // ajouter une fin quand une condition de fin est arrivée
         caseJouerOrdi();
     }
 }
@@ -156,6 +157,7 @@ function victoireJoueur(){
         || tGrille[0]==tGrille[3] && tGrille[3]==tGrille[6]
         || tGrille[1]==tGrille[4] && tGrille[4]==tGrille[7]
         || tGrille[2]==tGrille[5] && tGrille[5]==tGrille[8]){
+            victory = true;
             alert("Victoire : "+joueurActif.getNomJoueur());
         }
 }
@@ -171,11 +173,14 @@ function caseOrdi(){
     return nombre;
 }
 
-function caseJouerOrdi(){
+function caseJouerOrdi(){ 
     ordreJoueurActif();
-    if(joueurActif.getNomJoueur() == 'ordi'){
-        var nombre = caseOrdi();
-        console.log(nombre);
+    if(joueurActif.getNomJoueur() == 'ordi' && tour < 10 && victory == false){
+        var nombre = -1;
+        do {
+            nombre = caseOrdi();
+            console.log(nombre);
+        } while (typeof(tGrille[nombre]) != 'number');
 
         tGrille[nombre] = joueurActif.getSymboleJoueur();
         var caseModify = document.getElementById(nombre);
