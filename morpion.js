@@ -1,16 +1,30 @@
 //déclaration variables
+//variable qui contiendra l'objet joueur
+var joueur1;
+var joueur2;
+//variables pour alimenter l'objet joueur
 var nomJoueur1 = "joueur1";
 var nomJoueur2 = "";
 var ordreJoueur1 = 0;
 var ordreJoueur2 = 0;
 var symboleJoueur1 = "";
 var symboleJoueur2 = "";
+//variable pour savoir quel objet joueur utiliser
 var joueurActif;
+//initialisation de la grille repère
 var tGrille = [1,2,3,4,5,6,7,8,9];
 var affichageGrille = document.getElementById("grilleMorpion");
+//variables de contrôles de fin de partie
 var tour = 1;
 var victory = false; //flag de fin
+
 var btnReStart = document.getElementById('restart');
+
+var affichageOrdreJoueur1 = document.getElementById("ordreJoueur1");
+var affichageSymboleJoueur1 = document.getElementById("symboleJoueur1");
+var affichageOrdreJoueur2 = document.getElementById("ordreJoueur2");
+var affichageSymboleJoueur2 = document.getElementById("symboleJoueur2");
+
 btnReStart.addEventListener("click", nouvellePartie);
 
 //déterminer le nombre de joueurs humains
@@ -23,16 +37,9 @@ selectPion();
 ordreAleatoire();
 
 //création du joueur pour stocker ses infos
-var joueur1 = new JoueurMorpion(nomJoueur1, ordreJoueur1, symboleJoueur1);
-var joueur2 = new JoueurMorpion(nomJoueur2, ordreJoueur2, symboleJoueur2);
+creationJoueurs();
 
 //Afficher les joueurs dans le fieldset infos
-var affichageOrdreJoueur1 = document.getElementById("ordreJoueur1");
-var affichageSymboleJoueur1 = document.getElementById("symboleJoueur1");
-
-var affichageOrdreJoueur2 = document.getElementById("ordreJoueur2");
-var affichageSymboleJoueur2 = document.getElementById("symboleJoueur2");
-
 affichageInfosJoueurs();
 
 //initialiser l'affichage du tour en cours
@@ -90,7 +97,7 @@ function selectPion(){
         symboleJoueur1 = 'X';
         symboleJoueur2 = 'O';
     } else {
-        symboleJoueur1 = '0';
+        symboleJoueur1 = 'O';
         symboleJoueur2 = 'X';
     }
 }
@@ -102,6 +109,11 @@ function ordreAleatoire(){
     } else {
         ordreJoueur2 = 1;
     }
+}
+
+function creationJoueurs(){
+    joueur1 = new JoueurMorpion(nomJoueur1, ordreJoueur1, symboleJoueur1);
+    joueur2 = new JoueurMorpion(nomJoueur2, ordreJoueur2, symboleJoueur2);
 }
 
 function affichageGrilleMorpion(){ //TODO abonner les cases pour modifier
@@ -210,6 +222,7 @@ function nouvellePartie(){
     modeDeJeu();
     selectPion();
     ordreAleatoire();
+    creationJoueurs();
     affichageGrilleMorpion();
     affichageInfosJoueurs();
     caseJouerOrdi();
