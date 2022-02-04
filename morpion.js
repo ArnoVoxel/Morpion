@@ -36,7 +36,10 @@ affichageSymboleJoueur1.innerHTML = joueur1.getSymboleJoueur();
 affichageOrdreJoueur2.innerHTML = joueur2.getOrdreJoueur();
 affichageSymboleJoueur2.innerHTML = joueur2.getSymboleJoueur();
 
-//afficher le tour en cours
+console.log(joueur1.toString());
+console.log(joueur2.toString());
+
+//initialiser l'affichage du tour en cours
 var tourActif = document.getElementById("tour");
 tourActif.innerHTML = tour;
 
@@ -53,6 +56,8 @@ affichageGrilleMorpion();
 
 
 //si ordi choisit une case
+
+caseJouerOrdi(); //si Ordi joue en 1er doit pouvoir initialiser une case
 
 //afficher la case
 
@@ -110,6 +115,7 @@ function affichageGrilleMorpion(){ //TODO abonner les cases pour modifier
         caseGrille.setAttribute('src', 'assets/point.png');
         caseGrille.setAttribute('id', i);
         caseGrille.addEventListener("click", afficherSymbole);
+        caseGrille.addEventListener("click", ordiAuto);
         affichageGrille.appendChild(caseGrille);
     }
 }
@@ -123,6 +129,9 @@ function afficherSymbole(){ // afficher le symbole dans la grille et modifier va
         victoireJoueur();
         finPartieEgalite();
         tour++;
+    }
+    if(joueur2.getNomJoueur()=='ordi'){
+        caseJouerOrdi();
     }
 }
 
@@ -143,8 +152,11 @@ function victoireJoueur(){
         || tGrille[3]==tGrille[4] && tGrille[4]==tGrille[5]
         || tGrille[6]==tGrille[7] && tGrille[7]==tGrille[8]
         || tGrille[0]==tGrille[4] && tGrille[4]==tGrille[8]
-        || tGrille[6]==tGrille[4] && tGrille[4]==tGrille[2]){
-            alert("Victoire"+joueurActif.getNomJoueur());
+        || tGrille[6]==tGrille[4] && tGrille[4]==tGrille[2]
+        || tGrille[0]==tGrille[3] && tGrille[3]==tGrille[6]
+        || tGrille[1]==tGrille[4] && tGrille[4]==tGrille[7]
+        || tGrille[2]==tGrille[5] && tGrille[5]==tGrille[8]){
+            alert("Victoire : "+joueurActif.getNomJoueur());
         }
 }
 
@@ -152,4 +164,30 @@ function finPartieEgalite(){
     if(tour == 9){
         alert("EGALITE");
     }
+}
+
+function caseOrdi(){
+    var nombre = parseInt(Math.random()*9); //valeur entre 0 et 8 correspondant aux indices du tableau tGrille
+    return nombre;
+}
+
+function caseJouerOrdi(){
+    ordreJoueurActif();
+    if(joueurActif.getNomJoueur() == 'ordi'){
+        var nombre = caseOrdi();
+        console.log(nombre);
+
+        tGrille[nombre] = joueurActif.getSymboleJoueur();
+        var caseModify = document.getElementById(nombre);
+        console.log("caseModify "+caseModify);
+        caseModify.setAttribute('src', 'assets/'+joueurActif.getSymboleJoueur()+'.png');
+        tourActif.innerHTML = tour;
+        victoireJoueur();
+        finPartieEgalite();
+        tour++;
+    }
+}
+
+function ordiAuto(){ // pour avoir un délai avant apparition du choix de l'ordi
+    setTimeout(caseJouerOrdi, 2000);
 }
