@@ -116,7 +116,6 @@ function affichageGrilleMorpion(){ //TODO abonner les cases pour modifier
         caseGrille.setAttribute('src', 'assets/point.png');
         caseGrille.setAttribute('id', i);
         caseGrille.addEventListener("click", afficherSymbole);
-        caseGrille.addEventListener("click", ordiAuto);
         affichageGrille.appendChild(caseGrille);
     }
 }
@@ -131,8 +130,8 @@ function afficherSymbole(){ // afficher le symbole dans la grille et modifier va
         finPartieEgalite();
         tour++;
     }
-    if(joueur2.getNomJoueur()=='ordi'){ // ajouter une fin quand une condition de fin est arrivée
-        caseJouerOrdi();
+    if(joueur2.getNomJoueur()=='ordi'){ 
+        ordiAuto();
     }
 }
 
@@ -173,13 +172,12 @@ function caseOrdi(){
     return nombre;
 }
 
-function caseJouerOrdi(){ 
+function caseJouerOrdi(){ //nombre random entre 0 et 8 (les indices du tableai tGrille)
     ordreJoueurActif();
     if(joueurActif.getNomJoueur() == 'ordi' && tour < 10 && victory == false){
         var nombre = -1;
         do {
             nombre = caseOrdi();
-            console.log(nombre);
         } while (typeof(tGrille[nombre]) != 'number');
 
         tGrille[nombre] = joueurActif.getSymboleJoueur();
@@ -194,5 +192,5 @@ function caseJouerOrdi(){
 }
 
 function ordiAuto(){ // pour avoir un délai avant apparition du choix de l'ordi
-    setTimeout(caseJouerOrdi, 2000);
+    setTimeout(caseJouerOrdi, 1500);
 }
