@@ -21,24 +21,27 @@
             
             <div id="infosElements">
                 <div>Tour N°<span id="tour"></span></div>
-                <div class="joueur">
-                    <div>Joueur 1</div>
+                <div id="affichageJoueurs">
+                    <div class="joueur">
+                        <div>Joueur 1</div>
+                        <br>
+                        <div>joue en : <span id="ordreJoueur1"></span></div>
+                        <br>
+                        <div>avec le symbole : <span id="symboleJoueur1"></span></div>
+                    </div>
                     <br>
-                    <div>joue en : <span id="ordreJoueur1"></span></div>
-                    <br>
-                    <div>avec le symbole : <span id="symboleJoueur1"></span></div>
-                </div>
-                <br>
-                <div class="joueur">
-                    <div>Joueur 2</div>
-                    <br>
-                    <div>joue en : <span id="ordreJoueur2"></span></div>
-                    <br>
-                    <div>avec le symbole : <span id="symboleJoueur2"></span></div>
+                    <div class="joueur">
+                        <div>Joueur 2</div>
+                        <br>
+                        <div>joue en : <span id="ordreJoueur2"></span></div>
+                        <br>
+                        <div>avec le symbole : <span id="symboleJoueur2"></span></div>
+                    </div>
                 </div>
             </div>
         </fieldset>
     </div>
+    <button id="restart">Nouvelle partie</button>
     
     <script src="JoueurMorpion.Class.js"></script>
     <script src="morpion.js"></script>

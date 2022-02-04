@@ -9,7 +9,8 @@ var joueurActif;
 var tGrille = [1,2,3,4,5,6,7,8,9];
 var affichageGrille = document.getElementById("grilleMorpion");
 var tour = 1;
-var victory = false;
+var victory = false; //flag de fin
+var btnReStart = document.getElementById('restart');
 
 //déterminer le nombre de joueurs humains
 modeDeJeu();
@@ -157,7 +158,9 @@ function victoireJoueur(){
         || tGrille[1]==tGrille[4] && tGrille[4]==tGrille[7]
         || tGrille[2]==tGrille[5] && tGrille[5]==tGrille[8]){
             victory = true;
-            alert("Victoire : "+joueurActif.getNomJoueur());
+            btnReStart.style = "display : inline-block";
+            document.getElementById("affichageJoueurs").innerHTML = joueurActif.getNomJoueur() + " a gagné !";
+            // alert("Victoire : "+joueurActif.getNomJoueur());
         }
 }
 
@@ -182,7 +185,6 @@ function caseJouerOrdi(){ //nombre random entre 0 et 8 (les indices du tableai t
 
         tGrille[nombre] = joueurActif.getSymboleJoueur();
         var caseModify = document.getElementById(nombre);
-        console.log("caseModify "+caseModify);
         caseModify.setAttribute('src', 'assets/'+joueurActif.getSymboleJoueur()+'.png');
         tourActif.innerHTML = tour;
         victoireJoueur();
