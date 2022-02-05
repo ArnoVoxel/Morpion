@@ -117,7 +117,7 @@ function creationJoueurs(){
     joueur2 = new JoueurMorpion(nomJoueur2, ordreJoueur2, symboleJoueur2);
 }
 
-function affichageGrilleMorpion(){ //TODO abonner les cases pour modifier
+function affichageGrilleMorpion(){ //rempli un tableau avec image point.png
     affichageGrille.innerHTML = "";
     for(let i in tGrille){
         var caseGrille = document.createElement('img'); //création d'un élément à chaque boucle
@@ -224,21 +224,19 @@ function nouvellePartie(){
     selectPion();
     ordreAleatoire();
     creationJoueurs();
+    initAffichage();
     affichageGrilleMorpion();
-    affichageInfosJoueurs();
+
     caseJouerOrdi();
     btnReStart.style = "display : none";
 }
 
 function affichageInfosJoueurs(){
-    affichageOrdreJoueur1.innerHTML = joueur1.getOrdreJoueur();
-    affichageSymboleJoueur1.innerHTML = joueur1.getSymboleJoueur();
+    document.getElementById("ordreJoueur1").innerHTML = joueur1.getOrdreJoueur();
+    document.getElementById("symboleJoueur1").innerHTML = joueur1.getSymboleJoueur();
 
-    affichageOrdreJoueur2.innerHTML = joueur2.getOrdreJoueur();
-    affichageSymboleJoueur2.innerHTML = joueur2.getSymboleJoueur();
-
-    console.log(joueur1.toString());
-    console.log(joueur2.toString());
+    document.getElementById("ordreJoueur2").innerHTML = joueur2.getOrdreJoueur();
+    document.getElementById("symboleJoueur2").innerHTML = joueur2.getSymboleJoueur();
 }
 
 function initAffichage(){
