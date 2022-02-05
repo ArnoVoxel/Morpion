@@ -18,6 +18,10 @@ var affichageGrille = document.getElementById("grilleMorpion");
 var tour = 1;
 var victory = false; //flag de fin
 
+//scores des joueurs
+var scoreJ1 = 0;
+var scoreJ2 = 0;
+
 var btnReStart = document.getElementById('restart');
 
 var affichageOrdreJoueur1 = document.getElementById("ordreJoueur1");
@@ -169,7 +173,13 @@ function victoireJoueur(){
             victory = true;
             btnReStart.style = "display : inline-block";
             document.getElementById("affichageJoueurs").innerHTML = joueurActif.getNomJoueur() + " a gagné !";
-            // alert("Victoire : "+joueurActif.getNomJoueur());
+            if(joueurActif.getNomJoueur() == "joueur1"){
+                scoreJ1++;
+            } else {
+                scoreJ2++;
+            }
+            document.getElementById("scoresJ1").innerHTML = scoreJ1;
+            document.getElementById("scoresJ2").innerHTML = scoreJ2;
         }
 }
 
@@ -185,7 +195,7 @@ function finPartieEgalite(){
 
     if(tour == 9 && !condition){
         btnReStart.style = "display : inline-block";
-        alert("EGALITE");
+        document.getElementById("affichageJoueurs").innerHTML = " EGALITE !";
     }
 }
 
