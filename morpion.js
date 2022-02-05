@@ -25,6 +25,7 @@ var affichageSymboleJoueur1 = document.getElementById("symboleJoueur1");
 var affichageOrdreJoueur2 = document.getElementById("ordreJoueur2");
 var affichageSymboleJoueur2 = document.getElementById("symboleJoueur2");
 
+btnReStart.addEventListener("click", initAffichage);
 btnReStart.addEventListener("click", nouvellePartie);
 
 //déterminer le nombre de joueurs humains
@@ -230,7 +231,6 @@ function nouvellePartie(){
 }
 
 function affichageInfosJoueurs(){
-    document.getElementById("affichageJoueurs").innerHTML = "<div class=\"joueur\"\><div>Joueur 1</div\><br\><div>joue en : <span id=\"ordreJoueur1\"></span></div\><br\><div>avec le symbole : <span id=\"symboleJoueur1\"></span></div\></div\><br\><div class=\"joueur\"\><div>Joueur 2</div\><br\><div>joue en : <span id=\"ordreJoueur2\"></span></div\><br\><div>avec le symbole : <span id=\"symboleJoueur2\"></span></div\></div>";
     affichageOrdreJoueur1.innerHTML = joueur1.getOrdreJoueur();
     affichageSymboleJoueur1.innerHTML = joueur1.getSymboleJoueur();
 
@@ -239,4 +239,9 @@ function affichageInfosJoueurs(){
 
     console.log(joueur1.toString());
     console.log(joueur2.toString());
+}
+
+function initAffichage(){
+    document.getElementById("affichageJoueurs").innerHTML = "<div class=\"joueur\"\><div>Joueur 1</div\><br\><div>joue en : <span id=\"ordreJoueur1\"></span></div\><br\><div>avec le symbole : <span id=\"symboleJoueur1\"></span></div\></div\><br\><div class=\"joueur\"\><div>Joueur 2</div\><br\><div>joue en : <span id=\"ordreJoueur2\"></span></div\><br\><div>avec le symbole : <span id=\"symboleJoueur2\"></span></div\></div>";
+    affichageInfosJoueurs();
 }

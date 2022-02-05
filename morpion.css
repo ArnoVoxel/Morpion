@@ -1,5 +1,8 @@
 #plateau{
-    display: inline-flexbox;
+    display: grid;
+    grid-template-columns: [first]350px [line2] 200px;
+    grid-gap: 10px;
+    grid-auto-rows: minmax(350px, 351px);
 }
 
 img{
@@ -12,11 +15,13 @@ fieldset{
 }
 
 #grille{
-    width: 310px;
+    grid-column: 1;
+    grid-row: 1;
 }
 
 #infos{
-    width: 20%;
+    grid-column: 2;
+    grid-row: 1;
     padding: 2px;
 }
 
@@ -28,7 +33,6 @@ fieldset{
 }
 
 .joueur{
-    display: block;
     border: 1px solid black;
     padding: 2px;
 }
