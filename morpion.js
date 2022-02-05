@@ -134,9 +134,10 @@ function affichageGrilleMorpion(){ //rempli un tableau avec image point.png
 
 function afficherSymbole(){ // afficher le symbole dans la grille et modifier valeur dans tGrille
     ordreJoueurActif();
-    if(typeof(tGrille[this.getAttribute('id')]) == 'number'){
+    if(typeof(tGrille[this.getAttribute('id')]) == 'number' && victory == false){
         tGrille[this.getAttribute('id')] = joueurActif.getSymboleJoueur();
         this.setAttribute('src', 'assets/'+joueurActif.getSymboleJoueur()+'.png');
+        this.setAttribute('class', 'animate__animated animate__jello');
         tourActif.innerHTML = tour;
         victoireJoueur();
         finPartieEgalite();
@@ -215,6 +216,7 @@ function caseJouerOrdi(){ //nombre random entre 0 et 8 (les indices du tableai t
         tGrille[nombre] = joueurActif.getSymboleJoueur();
         var caseModify = document.getElementById(nombre);
         caseModify.setAttribute('src', 'assets/'+joueurActif.getSymboleJoueur()+'.png');
+        caseModify.setAttribute('class', 'animate__animated animate__jello');
         tourActif.innerHTML = tour;
         victoireJoueur();
         finPartieEgalite();

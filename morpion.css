@@ -1,3 +1,8 @@
+body{
+    background-color: #192a56;
+    color: #fbc531;
+}
+
 #plateau{
     display: grid;
     grid-template-columns: [first]350px [line2] 200px;
@@ -26,10 +31,10 @@ fieldset{
 }
 
 #infosElements{
-    padding: 0;
+    padding: 2px;
     margin: 2px;
-    background-color: lightgray;
-    color: darkgreen;
+    background-color: #40739e;
+    color: #e1b12c;
 }
 
 .joueur{
